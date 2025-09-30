@@ -5,7 +5,7 @@ Sistem Cerdas Adaptive Radiotherapy (ART) Kanker Serviks: Mengatasi Variasi Anat
 
 ## 1. Tujuan Proyek
 
-Penelitian ini bertujuan untuk mengembangkan sebuah model *deep learning* yang mampu memprediksi apakah seorang pasien kanker panggul akan memerlukan adaptasi rencana terapi radiasi di masa depan, dengan **hanya menganalisis citra CT (Computed Tomography) Perencanaan Awal**. Keberhasilan model ini berpotensi menjadi alat bantu klinis untuk mengidentifikasi pasien berisiko tinggi sejak dini, memungkinkan pemantauan yang lebih ketat atau penyesuaian strategi terapi.
+Penelitian ini bertujuan untuk mengembangkan sebuah model *deep learning* yang mampu memprediksi apakah seorang pasien kanker serviks akan memerlukan adaptasi rencana terapi radiasi di masa depan, dengan **hanya menganalisis citra CT (Computed Tomography) Perencanaan Awal**. Keberhasilan model ini berpotensi menjadi alat bantu klinis untuk mengidentifikasi pasien berisiko tinggi sejak dini, memungkinkan pemantauan yang lebih ketat atau penyesuaian strategi terapi.
 
 ---
 
