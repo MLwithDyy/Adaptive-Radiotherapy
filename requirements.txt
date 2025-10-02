@@ -1,0 +1,9 @@
+tensorflow
+pandas
+numpy
+simpleitk
+scipy
+scikit-learn
+seaborn
+matplotlib
+pydicom
