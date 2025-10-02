@@ -1,106 +1,106 @@
 # D.I.A.N.A (Dynamic Imaging-based Adaptive Neural Assistant)
-Sistem Cerdas Adaptive Radiotherapy (ART) Kanker Serviks: Mengatasi Variasi Anatomi Inter-Fraksi Pasien berbasis Machine Learning
+An Intelligent System for Adaptive Radiotherapy (ART) in Cervical Cancer: Addressing Inter-Fraction Anatomical Variations using Machine Learning
 
-# Prediksi Kebutuhan Radioterapi Adaptif dari CT Scan Awal
+# Predicting the Need for Adaptive Radiotherapy from Initial CT Scans
 
-## 1. Tujuan Proyek
+## 1. Project Objective
 
-Penelitian ini bertujuan untuk mengembangkan sebuah model *deep learning* yang mampu memprediksi apakah seorang pasien kanker serviks akan memerlukan adaptasi rencana terapi radiasi di masa depan, dengan **hanya menganalisis citra CT (Computed Tomography) Perencanaan Awal**. Keberhasilan model ini berpotensi menjadi alat bantu klinis untuk mengidentifikasi pasien berisiko tinggi sejak dini, memungkinkan pemantauan yang lebih ketat atau penyesuaian strategi terapi.
+This research aims to develop a deep learning model capable of predicting whether a cervical cancer patient will require future adaptation of their radiation therapy plan by analyzing only the initial planning CT (Computed Tomography) images. The success of this model has the potential to become a clinical support tool for identifying high-risk patients early, enabling closer monitoring or adjustments to the therapy strategy.
 
 ---
 
-## 2. Hasil Akhir
+## 2. Final Results
 
-Setelah melalui serangkaian proses pra-pemrosesan, pelatihan, dan validasi yang ketat, model **Convolutional Neural Network (CNN) 3D** murni yang dikembangkan berhasil mencapai performa yang sangat menjanjikan pada set data uji yang terpisah.
+After undergoing a rigorous series of preprocessing, training, and validation processes, the developed pure 3D Convolutional Neural Network (CNN) model achieved very promising performance on a separate test dataset.
 
-| **Metrik Kunci** | **Skor pada Data Uji** |
+| **Key Metric** | **Score on Test Data** |
 | ----------------------- | ---------------------- |
-| **Akurasi** | **88.00%** |
-| **Recall (Sensitivitas)** | **100%** |
-| **Presisi** | 73%                    |
+| **Accuracy** | **88.00%** |
+| **Recall (Sensitivity)** | **100%** |
+| **Precision** | 73%                    |
 | **F1-Score** | 84%                    |
 
-**Kesimpulan Utama:** Model berhasil **mengidentifikasi dengan benar semua pasien (100%)** yang sebenarnya memerlukan adaptasi terapi, yang merupakan tujuan klinis terpenting dari penelitian ini.
+**Key Conclusion:** The model successfully **correctly identified all patients (100%)** who actually required therapy adaptation, which is the most critical clinical objective of this research.
 
 ---
 
-## 3. Struktur Proyek
+## 3. Project Structure
 
-Proyek ini terdiri dari beberapa skrip Python yang harus dijalankan secara berurutan untuk mereplikasi hasil.
+This project consists of several Python scripts that must be run sequentially to replicate the results.
 
 
-├── 01_konversi_final.py      # (Lokal) Mengonversi CT DICOM mentah ke format NIfTI.
+├── 01_convert_final.py      # (Local) Converts raw DICOM CT scans to NIfTI format.
 
-├── 02_buat_label.py          # (Lokal) Membuat file label.txt otomatis untuk setiap pasien.
+├── 02_create_labels.py      # (Local) Automatically creates a label.txt file for each patient.
 
-├── 03_bagi_dataset.py        # (Lokal) Membagi dataset menjadi set Latih, Validasi, & Uji.
+├── 03_split_dataset.py      # (Local) Splits the dataset into Training, Validation, & Test sets.
 
-├── komponen_cnn_final.py     # Modul berisi arsitektur model dan data loader.
+├── cnn_components_final.py  # Module containing the model architecture and data loader.
 
-├── latih_cnn_final.py        # (Colab) Skrip utama untuk melatih model menggunakan GPU.
+├── train_cnn_final.py        # (Colab) Main script for training the model using a GPU.
 
-├── uji_model_final.py        # (Colab) Skrip untuk menguji model terbaik pada data uji.
+├── test_model_final.py       # (Colab) Script for testing the best model on the test data.
 
-├── requirements.txt          # Daftar pustaka Python yang dibutuhkan.
+├── requirements.txt          # List of required Python libraries.
 
-└── README.md                 # Penjelasan proyek ini.
+└── README.md                 # Explanation of this project.
 
 ---
 
-## 4. Alur Kerja & Cara Menjalankan
+## 4. Workflow & How to Run
 
-### Tahap 0: Prasyarat
+### Step 0: Prerequisites
 
-1.  **Struktur Folder Awal:**
-    * Buat folder utama proyek di komputer Anda, misal `D:/Proyek_AI/`.
-    * Di dalamnya, buat folder `DATASET_MENTAH/` dan letakkan semua folder data DICOM pasien di sana (misal, `PA0`, `PA1`, dst.).
-    * Letakkan file `peta_data.csv` (berisi `ID_Pasien` & `Grup`) di dalam `D:/Proyek_AI/`.
+1.  **Initial Folder Structure:**
+    * Create a main project folder on your computer, e.g., D:/AI_Project/.
+    * Inside it, create a RAW_DATASET/ folder and place all patient DICOM data folders there (e.g., PT0, PT1, etc.).
+    * Place the data_map.csv file (containing Patient_ID & Group) inside D:/AI_Project/.
 
-2.  **Instal Pustaka yang Dibutuhkan:**
-    Buka terminal atau command prompt, arahkan ke folder proyek Anda, dan jalankan:
+2.  **Install Required Libraries:**
+    Open a terminal or command prompt, navigate to your project folder, and run:
     ```bash
     pip install -r requirements.txt
     ```
 
-### Tahap 1: Persiapan Data (Jalankan di Komputer Lokal/VS Code)
+### Step 1: Data Preparation (Run on a Local Machine/VS Code)
 
-Jalankan skrip-skrip berikut secara berurutan. **Penting:** Pastikan untuk menyesuaikan variabel `PATH` di bagian atas setiap skrip agar sesuai dengan struktur folder Anda.
+Run the following scripts sequentially. Important: Make sure to adjust the PATH variable at the top of each script to match your folder structure.
 
-1.  **Konversi DICOM ke NIfTI:**
+1.  **Convert DICOM to NIfTI:**
     ```bash
-    python 01_konversi_final.py
+    python 01_convert_final.py
     ```
-    * **Output:** Akan membuat folder `DATASET_OLAHAN/` (atau nama lain yang Anda tentukan) berisi file NIfTI untuk setiap pasien.
+    * **Output:** It will create a PROCESSED_DATASET/ folder (or another name you specify) containing NIfTI files for each patient.
 
-2.  **Buat File Label:**
+2.  **Create Label Files:**
     ```bash
-    python 02_buat_label.py
+    python 02_create_labels.py
     ```
-    * **Output:** Akan membuat file `label.txt` di dalam setiap subfolder pasien di `DATASET_OLAHAN/`.
+    * **Output:** It will create a label.txt file inside each patient's subfolder in PROCESSED_DATASET/.
 
-3.  **Bagi Dataset:**
+3.  **Split Dataset:**
     ```bash
-    python 03_bagi_dataset.py
+    python 03_split_dataset.py
     ```
-    * **Output:** Akan membuat file `peta_data_final.csv` di folder utama Anda.
+    * **Output:** It will create a final_data_map.csv file in your main folder.
 
-4.  **Sinkronkan ke Google Drive:**
-    * Unggah seluruh folder `DATASET_OLAHAN/` yang berisi file NIfTI dan `label.txt`.
-    * Unggah file `peta_data_final.csv`.
-    * Unggah file `komponen_cnn_final.py`.
+4.  **Sync to Google Drive:**
+    * Upload the entire PROCESSED_DATASET/ folder containing the NIfTI files and label.txt.
+    * Upload the final_data_map.csv file.
+    * Upload the cnn_components_final.py file.
 
-### Tahap 2: Pelatihan & Pengujian (Jalankan di Google Colab)
+### Step 2: Training & Testing (Run in Google Colab)
 
-1.  **Siapkan Notebook Colab:**
-    * Buat notebook baru di Google Colab.
-    * Pastikan Anda memilih *runtime* dengan akselerator **GPU** (Runtime -> Change runtime type -> GPU).
+1.  **Prepare Colab Notebook:**
+    * Create a new notebook in Google Colab.
+    * Ensure you select a runtime with a GPU accelerator (Runtime -> Change runtime type -> GPU).
 
-2.  **Latih Model:**
-    * Salin-tempel seluruh isi dari skrip `latih_cnn_final.py` ke dalam sel notebook Colab.
-    * Pastikan variabel `DRIVE_BASE_PATH` dan path lainnya di dalam skrip sudah sesuai dengan lokasi data Anda di Google Drive.
-    * Jalankan sel tersebut. Proses ini akan menghubungkan Drive, melatih model, dan menyimpan file `model_terbaik.h5` ke Google Drive Anda.
+2.  **Train the Model:**
+    * Copy and paste the entire content of the train_cnn_final.py script into a Colab notebook cell.
+    * Ensure the DRIVE_BASE_PATH variable and other paths within the script match the location of your data in Google Drive.
+    * Run the cell. This process will connect to your Drive, train the model, and save the best_model.h5 file to your Google Drive.
 
-3.  **Uji Model:**
-    * Setelah pelatihan selesai, salin-tempel seluruh isi dari skrip `uji_model_final.py` ke sel notebook baru.
-    * Pastikan path-nya sudah benar.
-    * Jalankan sel tersebut untuk mendapatkan laporan evaluasi akhir dan *confusion matrix* pada data uji.
+3.  **Test the Model:**
+    * After training is complete, copy and paste the entire content of the test_model_final.py script into a new notebook cell.
+    * Make sure the paths are correct.
+    * Run the cell to get the final evaluation report and confusion matrix on the test data.
